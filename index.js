@@ -11,7 +11,10 @@ function Node(value, next, prev){
 
 LinkedList.prototype.addToHead = function(value){
   var newNode = new Node(value, this.head, null);
+
+  //If head node exists, update prev value as newNode
   if(this.head) this.head.prev = newNode;
+  //else(meaning list is empty), assign newNode as tail as well
   else this.tail = newNode;
   
   this.head = newNode;
@@ -19,14 +22,28 @@ LinkedList.prototype.addToHead = function(value){
 
 LinkedList.prototype.addToTail = function(value){
   var newNode = new Node(value, null, this.tail);
+
+  //If tail node exists, update next value as newNode
   if(this.tail) this.tail.next = newNode;
+  //else(meaning list is empty)m assign newNode as head as well
   else this.head = newNode;
   
   this.tail = newNode;
 }
 
-var ll = new LinkedList();
-ll.addToTail(400);
-ll.addToTail(300);
-ll.addToTail(500);
-console.log(ll);
+LinkedList.prototype.removeHead = function(){
+  if(!this.head) return null;
+
+  var val = this.head.value;
+
+  //Assign next value as new head
+  this.head = this.head.next;
+
+  //If 2nd element is not null and is now the new head, prev is null
+  if(this.head) this.head.prev = null;
+
+  //If list is empty, also assign tail as null
+  else this.tail = null;
+
+  return val;
+}
