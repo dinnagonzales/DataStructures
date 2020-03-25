@@ -39,11 +39,36 @@ LinkedList.prototype.removeHead = function(){
   //Assign next value as new head
   this.head = this.head.next;
 
-  //If 2nd element is not null and is now the new head, prev is null
+  //If new head node is not null, assign null to prev
   if(this.head) this.head.prev = null;
-
   //If list is empty, also assign tail as null
   else this.tail = null;
 
   return val;
 }
+
+LinkedList.prototype.removeTail = function(){
+  if(!this.tail) return null;
+
+  var val = this.tail.value;
+
+  //Assign prev value as new tail
+  this.tail = this.tail.prev;
+
+  //If new tail node is not null, assign null to next
+  if(this.tail) this.tail.next = null;
+  //If list is empty, also assign tail as null
+  else this.head = null;
+
+  return val;
+}
+
+LinkedList.prototype.search = function(searchValue){
+  var currentNode = this.head;
+  while(currentNode){
+    if(currentNode.value === searchValue) return currentNode.value;
+    currentNode = currentNode.next;
+  }
+  return null;
+}
+
