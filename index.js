@@ -72,3 +72,32 @@ LinkedList.prototype.search = function(searchValue){
   return null;
 }
 
+LinkedList.prototype.indexOf = function(value){
+  var indices = [];
+  
+  var currentNode = this.head;
+  var index = 0;
+  while(currentNode){
+    if(currentNode.value === value) {
+      indices.push(index);
+    }
+
+    currentNode = currentNode.next;
+    index ++;
+  }
+
+  return indices;
+}
+
+var ll = new LinkedList();
+ll.addToHead(1);
+ll.addToHead(3);
+ll.addToHead(2);
+ll.addToHead(3);
+ll.addToHead(3);
+ll.addToHead(3);
+ll.addToHead(4);
+ll.addToHead(5);
+ll.addToHead(3);
+
+console.log(ll.indexOf(3));
